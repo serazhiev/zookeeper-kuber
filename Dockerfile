@@ -17,7 +17,7 @@ RUN set -x \
     && gpg --batch --verify "apache-$ZK_DIST.tar.gz.asc" "apache-$ZK_DIST.tar.gz" \
     && tar -xzf "apache-$ZK_DIST.tar.gz" -C /opt \
     && rm -r "$GNUPGHOME" "apache-$ZK_DIST.tar.gz" "apache-$ZK_DIST.tar.gz.asc" \
-    && ln -s /opt/$ZK_DIST /opt/zookeeper \
+    && ln -s /opt/apache-$ZK_DIST /opt/zookeeper \
     && rm -rf /opt/zookeeper/CHANGES.txt \
     /opt/zookeeper/README.txt \
     /opt/zookeeper/NOTICE.txt \
@@ -32,9 +32,9 @@ RUN set -x \
     /opt/zookeeper/ivysettings.xml \
     /opt/zookeeper/recipes \
     /opt/zookeeper/src \
-    /opt/zookeeper/$ZK_DIST.jar.asc \
-    /opt/zookeeper/$ZK_DIST.jar.md5 \
-    /opt/zookeeper/$ZK_DIST.jar.sha1 \
+    /opt/zookeeper/apache-$ZK_DIST.jar.asc \
+    /opt/zookeeper/apache-$ZK_DIST.jar.md5 \
+    /opt/zookeeper/apache-$ZK_DIST.jar.sha1 \
 	&& apt-get autoremove -y wget \
 	&& rm -rf /var/lib/apt/lists/*
 
@@ -48,8 +48,8 @@ RUN set -x \
     && [ `id -u $ZK_USER` -eq 1000 ] \
     && [ `id -g $ZK_USER` -eq 1000 ] \
     && mkdir -p $ZK_DATA_DIR $ZK_DATA_LOG_DIR $ZK_LOG_DIR /usr/share/zookeeper /tmp/zookeeper /usr/etc/ \
-	&& chown -R "$ZK_USER:$ZK_USER" /opt/$ZK_DIST $ZK_DATA_DIR $ZK_LOG_DIR $ZK_DATA_LOG_DIR /tmp/zookeeper \
+	&& chown -R "$ZK_USER:$ZK_USER" /opt/apache-$ZK_DIST $ZK_DATA_DIR $ZK_LOG_DIR $ZK_DATA_LOG_DIR /tmp/zookeeper \
 	&& ln -s /opt/zookeeper/conf/ /usr/etc/zookeeper \
 	&& ln -s /opt/zookeeper/bin/* /usr/bin \
-	&& ln -s /opt/zookeeper/$ZK_DIST.jar /usr/share/zookeeper/ \
+	&& ln -s /opt/zookeeper/apache-$ZK_DIST.jar /usr/share/zookeeper/ \
 	&& ln -s /opt/zookeeper/lib/* /usr/share/zookeeper 
