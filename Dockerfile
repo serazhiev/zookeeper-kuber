@@ -37,7 +37,6 @@ RUN set -x \
     /opt/zookeeper/$ZK_DIST.jar.sha1 \
         && apt-get autoremove -y wget \
         && rm -rf /var/lib/apt/lists/*
-
 #Copy configuration generator script to bin
 COPY scripts /opt/zookeeper/bin/
 
