@@ -42,7 +42,6 @@ RUN set -x \
     /opt/zookeeper/$ZK_DIST.jar.asc \
     /opt/zookeeper/$ZK_DIST.jar.md5 \
     /opt/zookeeper/$ZK_DIST.jar.sha1 \
-    && apt-get autoremove -y wget \
     && rm -rf /var/lib/apt/lists/* \
     && wget -q "http://www.apache.org/dist/kafka/$KAFKA_VERSION/$KAFKA_DIST.tgz" \
     && wget -q "http://www.apache.org/dist/kafka/$KAFKA_VERSION/$KAFKA_DIST.tgz.asc" \
